@@ -1,11 +1,10 @@
-
 "use client";
 
 import { useState } from "react";
 
-import ExcelUpload from "@/components/upload/ExcelUpload";
-import Dashboard from "@/components/dashboard/dashboard";
-import type { Bug } from "@/components/dashboard/types";
+import ExcelUpload from "./excel-upload/ExcelUpload";
+import Dashboard from "./dashboard/dashboard";
+import type { Bug } from "./dashboard/types";
 
 export default function Home() {
   const [bugs, setBugs] = useState<Bug[]>([]);

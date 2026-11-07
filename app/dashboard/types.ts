@@ -45,10 +45,21 @@ export type StatusChartItem = {
   fill: string;
 };
 
-// Important: נגמר is a substring, not an exact match.
-export function isFixed(status: string): boolean {
-  return status
-    .trim()
-    .toLocaleLowerCase()
-    .includes("נגמר");
-}
+export type BugDetailsProps = {
+  bugs: Bug[];
+  teams: string[];
+  statuses: string[];
+};
+
+export type BugTableProps = {
+  bugs: Bug[];
+};
+
+export type StatCardProps = {
+  title: string;
+  value: string | number;
+  description: string;
+  icon: ReactNode;
+  color: string;
+};
+

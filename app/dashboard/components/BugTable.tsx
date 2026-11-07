@@ -1,25 +1,23 @@
-
 "use client";
 
-import type { Bug } from "./types";
-import { isFixed } from "./types";
-import { formatDate, getBugAge } from "@/lib/bug-utils";
+import type { BugTableProps } from "../types";
+import {
+  formatDate,
+  getBugAge,
+  isFixed,
+} from "../dashboard-utils";
 
-type Props = {
-  bugs: Bug[];
-};
-
-export default function BugTable({ bugs }: Props) {
+export default function BugTable({ bugs }: BugTableProps) {
   return (
     <div dir="rtl" className="w-full overflow-x-auto">
       <table className="w-full min-w-[900px] text-right text-sm">
         <thead className="sticky top-0 z-10 bg-slate-50 text-xs font-semibold text-slate-500">
           <tr>
-            <th className="px-5 py-4">מספר באג</th>
-            <th className="px-5 py-4">שם הבאג</th>
-            <th className="px-5 py-4">צוות</th>
+            <th className="px-5 py-4">מספר תקלה / משימה</th>
+            <th className="px-5 py-4">שם משימה / תקלה</th>
+            <th className="px-5 py-4">צוות אחראי</th>
             <th className="px-5 py-4">תאריך פתיחה</th>
-            <th className="px-5 py-4">גיל הבאג (ימים)</th>
+            <th className="px-5 py-4">זמן המתנה לטיפול</th>
             <th className="px-5 py-4">סטטוס</th>
             <th className="px-5 py-4">מצב טיפול</th>
           </tr>
@@ -27,7 +25,7 @@ export default function BugTable({ bugs }: Props) {
 
         <tbody className="divide-y divide-slate-100">
           {bugs.map((bug, index) => {
-            const fixed = isFixed(bug.status);
+            const fixed = isFixed(bug.status ?? "");
 
             return (
               <tr

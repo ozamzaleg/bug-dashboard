@@ -1,25 +1,24 @@
-
 "use client";
 
 import { useMemo } from "react";
 
-import DashboardHeader from "./DashboardHeader";
-import StatsGrid from "./StatsGrid";
+import DashboardHeader from "./components/DashboardHeader";
+import StatsGrid from "./components/StatsGrid";
 
 import {
   ResolutionChart,
   TeamPerformance,
-} from "./DashboardCharts";
+} from "./components/DashboardCharts";
 
 import {
   StatusBreakdown,
   TeamRanking,
-} from "./TeamSections";
+} from "./components/TeamSections";
 
-import BugDetails from "./BugDetails";
+import BugDetails from "./components/BugDetails";
 
 import { useDashboardData } from "./useDashboardData";
-import { isFixed } from "./types";
+import { getUnresolvedBugs } from "./dashboard-utils";
 
 import type { DashboardProps } from "./types";
 
@@ -29,8 +28,7 @@ export default function Dashboard({
   bugs,
   onReset,
 }: DashboardProps) {
-
-  // All bugs: used by the main dashboard charts and statistics
+  // All bugs: main dashboard statistics and charts
   const {
     stats,
     teamStats,
@@ -38,19 +36,13 @@ export default function Dashboard({
     statuses,
   } = useDashboardData(bugs);
 
-  // Only unresolved bugs: used by the status breakdown chart
-  const unresolvedBugs = useMemo(() => {
-    return bugs.filter((bug) => {
-      const status = String(bug.status ?? "").trim();
+  // Only unresolved bugs
+  const unresolvedBugs = useMemo(
+    () => getUnresolvedBugs(bugs),
+    [bugs]
+  );
 
-      return (
-        !isFixed(bug.status) &&
-        !status.includes("נגמר")
-      );
-    });
-  }, [bugs]);
-
-  // Calculate status distribution only for unresolved bugs
+  // Statistics for unresolved bugs only
   const unresolvedData = useDashboardData(unresolvedBugs);
 
   return (
@@ -65,7 +57,7 @@ export default function Dashboard({
         {/* Main statistics - ALL bugs */}
         <StatsGrid stats={stats} />
 
-        {/* Charts - ALL bugs */}
+        {/* Main charts - ALL bugs */}
         <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
           <ResolutionChart stats={stats} />
 

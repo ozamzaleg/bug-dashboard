@@ -8,13 +8,11 @@ import {
 } from "lucide-react";
 
 import StatCard from "./StatCard";
-import type { DashboardStats } from "./types";
+import type { StatsGridProps} from "../types";
 
-type Props = {
-  stats: DashboardStats;
-};
 
-export default function StatsGrid({ stats }: Props) {
+
+export default function StatsGrid({ stats }: StatsGridProps) {
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <StatCard

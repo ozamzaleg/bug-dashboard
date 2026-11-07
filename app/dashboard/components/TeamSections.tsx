@@ -14,7 +14,7 @@ import type {
   DashboardStats,
   StatusChartItem,
   TeamStat,
-} from "./types";
+} from "../types";
 
 export function StatusBreakdown({
   stats,

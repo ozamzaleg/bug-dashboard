@@ -10,8 +10,8 @@ import {
   Legend,
 } from "recharts";
 
-import type { DashboardStats, TeamStat } from "./types";
-import { CHART_COLORS } from "./dashboard-utils";
+import type { DashboardStats, TeamStat } from "../types";
+import { CHART_COLORS } from "../contants";
 
 export function ResolutionChart({
   stats,
